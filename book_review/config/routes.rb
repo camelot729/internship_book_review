@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  resources :review_comments
-  resources :books
+
+  #, only %i{create update destroy}
+  resources :books do
+    resources :review_comments
+  end
+
   get 'users/profile'
   devise_for :users
+
+  root 'users#profile'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

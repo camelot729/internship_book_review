@@ -1,2 +1,8 @@
-h1 Users#profile
-p Find me in app/views/users/profile.html.slim
+.col-md-4.offset-md-5
+  .row
+    - if user_signed_in?
+      .col-md-6
+        | Здравствуйте, &nbsp
+        = current_user.email
+    - else
+      = render 'form'

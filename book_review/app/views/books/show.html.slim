@@ -19,3 +19,26 @@ p
 => link_to 'Edit', edit_book_path(@book)
 '|
 =< link_to 'Back', books_path
+
+= form_with(model: [ @book, ReviewComment.new ], local: true) do |form|
+  .field
+    = form.label :title
+    = form.text_field :title
+
+  .field
+    = form.label :body
+    = form.text_field :body
+
+  = form.submit
+h2
+  | Comments:
+
+- @book.review_comments.each do |review_comment|
+  p
+    strong
+      | Title: &nbsp
+      = review_comment.title
+  p
+    = review_comment.body
+  p
+    = User.find_by(id: review_comment.user_id)['email']

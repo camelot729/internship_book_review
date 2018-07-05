@@ -24,11 +24,16 @@ class ReviewCommentsController < ApplicationController
   # POST /review_comments
   # POST /review_comments.json
   def create
-    @review_comment = ReviewComment.new(review_comment_params)
+
+    @book = Book.find(params[:book_id])
+    @review_comment = @book.review_comments.create(review_comment_params)
+    @review_comment.user_id = current_user.id
+
+    # redirect_to book_path(@book)
 
     respond_to do |format|
       if @review_comment.save
-        format.html { redirect_to @review_comment, notice: 'Review comment was successfully created.' }
+        format.html { redirect_to book_path(@book), notice: 'Review comment was successfully created.' }
         format.json { render :show, status: :created, location: @review_comment }
       else
         format.html { render :new }
