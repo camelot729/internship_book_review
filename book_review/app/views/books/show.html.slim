@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @book.title
+p
+  strong Review:
+  = @book.review
+p
+  strong Book rating:
+  = @book.book_rating
+p
+  strong Review rating:
+  = @book.review_rating
+p
+  strong Publication time:
+  = @book.publication_time
+
+=> link_to 'Edit', edit_book_path(@book)
+'|
+=< link_to 'Back', books_path

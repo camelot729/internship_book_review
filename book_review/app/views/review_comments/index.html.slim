@@ -1,0 +1,25 @@
+h1 Listing review_comments
+
+table
+  thead
+    tr
+      th Title
+      th Body
+      th Book
+      th
+      th
+      th
+
+  tbody
+    - @review_comments.each do |review_comment|
+      tr
+        td = review_comment.title
+        td = review_comment.body
+        td = review_comment.book
+        td = link_to 'Show', review_comment
+        td = link_to 'Edit', edit_review_comment_path(review_comment)
+        td = link_to 'Destroy', review_comment, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Review comment', new_review_comment_path
