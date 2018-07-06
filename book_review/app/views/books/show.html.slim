@@ -42,3 +42,7 @@ h2
     = review_comment.body
   p
     = User.find_by(id: review_comment.user_id)['email']
+
+  => link_to 'Edit Comment', edit_book_review_comment_path(review_comment)
+  '|
+  =< link_to 'Delete Comment', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete
