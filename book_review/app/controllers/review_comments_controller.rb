@@ -59,9 +59,11 @@ class ReviewCommentsController < ApplicationController
   # DELETE /review_comments/1
   # DELETE /review_comments/1.json
   def destroy
+    @book = Book.find(params[:book_id])
+    @review_comment = @book.review_comments.find(params[:id])
     @review_comment.destroy
     respond_to do |format|
-      format.html { redirect_to review_comments_url, notice: 'Review comment was successfully destroyed.' }
+      format.html { redirect_to book_path(@book), notice: 'Review comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
