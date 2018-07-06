@@ -27,17 +27,15 @@ class ReviewCommentsController < ApplicationController
 
     @book = Book.find(params[:book_id])
     @review_comment = @book.review_comments.create(review_comment_params)
-    @review_comment.user_id = current_user.id
+    @review_comment.user = current_user
 
     # redirect_to book_path(@book)
 
     respond_to do |format|
       if @review_comment.save
-        format.html { redirect_to book_path(@book), notice: 'Review comment was successfully created.' }
-        format.json { render :show, status: :created, location: @review_comment }
+        format.html { redirect_to @book, notice: 'Review comment was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @review_comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -47,11 +45,9 @@ class ReviewCommentsController < ApplicationController
   def update
     respond_to do |format|
       if @review_comment.update(review_comment_params)
-        format.html { redirect_to @review_comment, notice: 'Review comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review_comment }
+        format.html { redirect_to book_path(@review_comment.book), notice: 'Review comment was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @review_comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,8 +59,7 @@ class ReviewCommentsController < ApplicationController
     @review_comment = @book.review_comments.find(params[:id])
     @review_comment.destroy
     respond_to do |format|
-      format.html { redirect_to book_path(@book), notice: 'Review comment was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to @book, notice: 'Review comment was successfully destroyed.' }
     end
   end
 

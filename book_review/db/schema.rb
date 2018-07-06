@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_05_131956) do
+ActiveRecord::Schema.define(version: 2018_07_06_123336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 2018_07_05_131956) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.string "book_image_file_name"
+    t.string "book_image_content_type"
+    t.integer "book_image_file_size"
+    t.datetime "book_image_updated_at"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
@@ -54,6 +58,10 @@ ActiveRecord::Schema.define(version: 2018_07_05_131956) do
     t.string "first_name"
     t.string "last_name"
     t.string "time_zone"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

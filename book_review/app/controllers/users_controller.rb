@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user!
+
   def index
   end
 
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
     if @user.update_with_password(user_params)
       sign_in @user
       redirect_to root_path
-    else 
+    else
       render "edit"
     end
 
@@ -39,6 +40,6 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation, :first_name, :last_name, :email, :id )
+    params.require(:user).permit(:password, :password_confirmation, :first_name, :last_name, :email, :id, :avatar )
   end
 end

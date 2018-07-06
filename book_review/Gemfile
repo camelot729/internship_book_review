@@ -45,6 +45,8 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
 
+gem "paperclip", "~> 6.0.0"
+
 gem 'omniauth-google-oauth2'
 
 group :development, :test do
