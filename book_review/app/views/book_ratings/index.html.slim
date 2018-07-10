@@ -1,0 +1,23 @@
+h1 Listing book_ratings
+
+table
+  thead
+    tr
+      th Rating value
+      th Book
+      th
+      th
+      th
+
+  tbody
+    - @book_ratings.each do |book_rating|
+      tr
+        td = book_rating.rating_value
+        td = book_rating.book
+        td = link_to 'Show', book_rating
+        td = link_to 'Edit', edit_book_rating_path(book_rating)
+        td = link_to 'Destroy', book_rating, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+/ = link_to 'New Book rating', new_book_rating_path

@@ -10,23 +10,35 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @book = Book.find(params[:id])
+    @book_rating = current_user.book_ratings.find_by(book_id: params[:id])
+    # if @book_rating.nil?
+    #   @book_rating = @book.book_ratings.new
+    # end
+
+    @overall_rating = Book.find(params[:id]).rating
+
+    # @user_book_rating =§
+    # @b_r = @book.book_ratings.new
+
   end
 
   # GET /books/new
   def new
-    @user_book = Book.new
+    @book = Book.new
 
   end
 
   # GET /books/1/edit
   def edit
+    @book = Book.find(params[:id])
   end
 
   # POST /books
   # POST /books.json
   def create
     @book = current_user.books.new(book_params)
-
+    # @book_rating = @book.book_ratings.new(book_rating_params)
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
@@ -39,6 +51,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -65,6 +78,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :review, :book_rating, :review_rating, :publication_time)
+      params.require(:book).permit(:title, :review, :book_rating, :review_rating, :publication_time, :book_image)
     end
 end

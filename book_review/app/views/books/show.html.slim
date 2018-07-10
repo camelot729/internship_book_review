@@ -1,5 +1,7 @@
 p#notice = notice
-
+p
+  .round-image-50
+    = image_tag @book.book_image.url(:thumb)
 p
   strong Title:
   = @book.title
@@ -15,7 +17,25 @@ p
 p
   strong Publication time:
   = @book.publication_time
-- if @book.user_id == current_user.id
+
+p
+  strong Overrall rating:
+  = @overall_rating
+p
+  strong Stars:
+  - if @book_rating
+    = @book_rating.rating_value
+  - else
+    = form_for [@book, @book.book_ratings.new] do |f|
+      = f.label :rating_value
+      = f.number_field :rating_value
+
+      = f.submit
+
+
+
+
+- if @book.user == current_user
   => link_to 'Edit', edit_book_path(@book)
   '|
 =< link_to 'Back', books_path
