@@ -15,9 +15,9 @@ p
 p
   strong Publication time:
   = @book.publication_time
-
-=> link_to 'Edit', edit_book_path(@book)
-'|
+- if @book.user_id == current_user.id
+  => link_to 'Edit', edit_book_path(@book)
+  '|
 =< link_to 'Back', books_path
 
 = form_with(model: [ @book, ReviewComment.new ], local: true) do |form|
@@ -33,16 +33,4 @@ p
 h2
   | Comments:
 
-- @book.review_comments.each do |review_comment|
-  p
-    strong
-      | Title: &nbsp
-      = review_comment.title
-  p
-    = review_comment.body
-  p
-    = User.find_by(id: review_comment.user_id)['email']
-
-  => link_to 'Edit Comment', edit_book_review_comment_path(review_comment)
-  '|
-  =< link_to 'Delete Comment', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete
+= render 'review_comments'

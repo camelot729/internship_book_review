@@ -4,5 +4,12 @@
       .col-md-6
         | Здравствуйте, &nbsp
         = current_user.email
+        .round-image-50
+          = image_tag current_user.avatar.url(:thumb)
+
+          | sdgfad
     - else
       = render 'form'
+
+
+  = link_to "Log out", destroy_user_session_path, :method => :delete

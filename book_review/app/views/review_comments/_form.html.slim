@@ -1,4 +1,4 @@
-= form_for @review_comment do |f|
+= form_for [:book, @review_comment] do |f|
   - if @review_comment.errors.any?
     #error_explanation
       h2 = "#{pluralize(@review_comment.errors.count, "error")} prohibited this review_comment from being saved:"

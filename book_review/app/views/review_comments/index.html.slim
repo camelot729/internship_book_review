@@ -18,7 +18,7 @@ table
         td = review_comment.book
         td = link_to 'Show', review_comment
         td = link_to 'Edit', edit_review_comment_path(review_comment)
-        td = link_to 'Destroy', review_comment, data: { confirm: 'Are you sure?' }, method: :delete
+        td = link_to 'Destroy', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
