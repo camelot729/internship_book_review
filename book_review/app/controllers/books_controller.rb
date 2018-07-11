@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books
@@ -31,43 +32,47 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
+
+    @book = current_user.book.find(params[:id])
+
   end
 
   # POST /books
   # POST /books.json
   def create
     @book = current_user.books.new(book_params)
-    # @book_rating = @book.book_ratings.new(book_rating_params)
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-      else
-        format.html { render :new }
-      end
+
+
+    if @book.save
+      redirect_to @book, notice: 'Book was successfully created.'
+    else
+      render :new
     end
+
   end
 
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
 
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+
+
+    @book = current_user.book.find(params[:id])
+    if @book.update(book_params)
+      redirect_to @book, notice: 'Book was successfully updated.'
+    else
+      render :edit
     end
+
   end
 
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
     @book.destroy
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
-    end
+
+    redirect_to books_url, notice: 'Book was successfully destroyed.'
+
   end
 
   private
