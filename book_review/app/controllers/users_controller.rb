@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     @user = current_user
 
     if @user.update_with_password(user_params)
-      sign_in @user
       redirect_to root_path
     else
       render "edit"
@@ -29,13 +28,13 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    respond_to do |format|
-      if current_user.update(user_params)
-        format.html { redirect_to @user, notice: 'User\'s information was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+
+    if current_user.update(user_params)
+      redirect_to @user, notice: 'User\'s information was successfully updated.'
+    else
+      render :edit
     end
+
   end
 
 

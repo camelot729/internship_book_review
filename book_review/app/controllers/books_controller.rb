@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
   # GET /books/new
   def new
-    @user_book = Book.new
+    @book = Book.new
 
   end
 
@@ -27,13 +27,13 @@ class BooksController < ApplicationController
   def create
     @book = current_user.books.new(book_params)
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-      else
-        format.html { render :new }
-      end
+
+    if @book.save
+      redirect_to @book, notice: 'Book was successfully created.'
+    else
+      render :new
     end
+
   end
 
   # PATCH/PUT /books/1
@@ -41,9 +41,9 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        redirect_to @book, notice: 'Book was successfully updated.'
       else
-        format.html { render :edit }
+        render :edit
       end
     end
   end
@@ -52,9 +52,9 @@ class BooksController < ApplicationController
   # DELETE /books/1.json
   def destroy
     @book.destroy
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
-    end
+
+    redirect_to books_url, notice: 'Book was successfully destroyed.'
+
   end
 
   private

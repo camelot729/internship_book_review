@@ -31,25 +31,24 @@ class ReviewCommentsController < ApplicationController
 
     # redirect_to book_path(@book)
 
-    respond_to do |format|
-      if @review_comment.save
-        format.html { redirect_to @book, notice: 'Review comment was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @review_comment.save
+      redirect_to @book, notice: 'Review comment was successfully created.'
+    else
+      render :new
     end
+
   end
 
   # PATCH/PUT /review_comments/1
   # PATCH/PUT /review_comments/1.json
   def update
-    respond_to do |format|
-      if @review_comment.update(review_comment_params)
-        format.html { redirect_to book_path(@review_comment.book), notice: 'Review comment was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+
+    if @review_comment.update(review_comment_params)
+      redirect_to book_path(@review_comment.book), notice: 'Review comment was successfully updated.'
+    else
+      render :edit
     end
+
   end
 
   # DELETE /review_comments/1
@@ -58,9 +57,9 @@ class ReviewCommentsController < ApplicationController
     @book = Book.find(params[:book_id])
     @review_comment = @book.review_comments.find(params[:id])
     @review_comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @book, notice: 'Review comment was successfully destroyed.' }
-    end
+
+    redirect_to @book, notice: 'Review comment was successfully destroyed.'
+
   end
 
   private
