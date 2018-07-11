@@ -57,8 +57,8 @@ class ReviewCommentsController < ApplicationController
     @book = Book.find(params[:book_id])
     @review_comment = @book.review_comments.find(params[:id])
     @review_comment.destroy
-
     redirect_to @book, notice: 'Review comment was successfully destroyed.'
+
 
   end
 

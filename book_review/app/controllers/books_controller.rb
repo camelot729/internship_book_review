@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books
@@ -20,6 +21,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @user_book = current_user.book.find(params[:id])
   end
 
   # POST /books
@@ -39,6 +41,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    @user_book = current_user.book.find(params[:id])
     respond_to do |format|
       if @book.update(book_params)
         redirect_to @book, notice: 'Book was successfully updated.'
