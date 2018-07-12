@@ -23,15 +23,11 @@ p
   = @overall_rating
 p
   strong Stars:
-  - if @book_rating
+  - unless @book_rating.new_record?
     = @book_rating.rating_value
+    => link_to 'Edit', edit_book_book_rating_path(@book, @book_rating)
   - else
-    = form_for [@book, @book.book_ratings.new] do |f|
-      = f.label :rating_value
-      = f.number_field :rating_value
-
-      = f.submit
-
+    = render "book_rating"
 
 
 

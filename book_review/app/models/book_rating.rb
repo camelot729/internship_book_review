@@ -4,6 +4,6 @@ class BookRating < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :book_id }
 
-  validates_numericality_of :rating_value, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10
+  validates :rating_value, inclusion: {in: 0..10}
 
 end

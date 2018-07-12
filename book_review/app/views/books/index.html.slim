@@ -17,14 +17,7 @@ table
       tr
         td = book.title
         td = book.review
-        /rating
         td = book.book_rating
-        / td
-        /   ul.user_rating
-        /     = form_for [book, review_rating] do |form|
-        /       = form.hidden_field :review_rating
-        /     - 5.times do |i|
-        /       li.rating_star data_stars="#{i}"
         td = book.user.email
         td = book.publication_time
         td = link_to 'Show', book
@@ -36,23 +29,6 @@ br
 
 = link_to 'New Book', new_book_path
 
-
-# Book
-
-  has_many :book_ratings
-
-
-  def rating
-    (book_ratings.sum(:rating_value) / books_ratings.count).round(1)
-  end
-
-
-# BookRating
-
-  belongs_to :book
-
-  integer :rating_value
-  integer :book_id
 
 
 

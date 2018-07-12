@@ -16,14 +16,12 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
-
   end
 
   def show
   end
 
   def profile
-
   end
 
   def update
@@ -34,7 +32,6 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-
   end
 
 
