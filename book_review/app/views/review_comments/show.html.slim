@@ -2,14 +2,14 @@ p#notice = notice
 
 p
   strong Title:
-  = @review_comment.title
+  = review_comment.title
 p
   strong Body:
-  = @review_comment.body
+  = review_comment.body
 p
   strong Book:
-  = @review_comment.book
+  = review_comment.book
 
-=> link_to 'Edit', edit_review_comment_path(@review_comment)
+=> link_to 'Edit', edit_review_comment_path(review_comment)
 '|
-=< link_to "Back", @review_comment.book
+=< link_to "Back", review_comment.book

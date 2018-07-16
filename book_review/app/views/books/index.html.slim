@@ -13,17 +13,17 @@ table
       th
 
   tbody
-    - @books.each do |book|
+    - books.each do |b|
       tr
-        td = book.title
-        td = book.review
-        td = book.book_rating
-        td = book.user.email
-        td = book.publication_time
-        td = link_to 'Show', book
-        - if book.user == current_user
-          td = link_to 'Edit', edit_book_path(book)
-          td = link_to 'Destroy', book, data: { confirm: 'Are you sure?' }, method: :delete
+        td = b.title
+        td = b.review
+        td = b.book_rating
+        td = b.user.email
+        td = b.publication_time
+        td = link_to 'Show', b
+        - if b.user == current_user
+          td = link_to 'Edit', edit_book_path(b)
+          td = link_to 'Destroy', b, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 

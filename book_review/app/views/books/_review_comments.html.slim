@@ -1,4 +1,4 @@
-- @book.review_comments.each do |review_comment|
+- book.review_comments.each do |review_comment|
   p
     strong
       | Title: &nbsp
@@ -8,7 +8,7 @@
   p
     = review_comment.user.email
   - if review_comment.user_id == current_user.id
-    => link_to 'Edit', edit_book_review_comment_path(@book, review_comment)
+    => link_to 'Edit', edit_book_review_comment_path(book, review_comment)
     '|
     =< link_to 'Destroy', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete
 
