@@ -5,7 +5,7 @@ class ReviewCommentsController < ApplicationController
   # GET /review_comments.json
   expose :review_comments
   expose :review_comment
-  expose :book, ->{ Book.find(params[:book_id]) }
+  expose :book
 
   def create
     review_comment = book.review_comments.create(review_comment_params)
