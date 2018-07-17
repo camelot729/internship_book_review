@@ -3,7 +3,7 @@ class BookRatingsController < ApplicationController
   expose :book
 
   def create
-    book_rating = book.book_ratings.new(book_rating_params)
+    book_rating.book = book
     book_rating.user = current_user
     if book_rating.save
       redirect_to book,

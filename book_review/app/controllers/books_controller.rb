@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = current_user.books.new(book_params)
+    book.user = current_user
     if book.save
       redirect_to book,
         notice: "Book was successfully created."
@@ -20,7 +20,7 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = current_user.book.find(params[:id])
+    book.user = current_user
     if book.update(book_params)
       redirect_to book,
         notice: "Book was successfully updated."
