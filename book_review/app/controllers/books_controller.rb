@@ -3,8 +3,7 @@ class BooksController < ApplicationController
 
   expose :book
   expose :books, -> { Book.all }
-  expose :book_rating,
-    -> { current_user.book_ratings.find_by(book_id: params[:id]) }
+  expose :book_rating, parent: :current_user, find_by: :book_id
 
   def create
     book = current_user.books.new(book_params)
