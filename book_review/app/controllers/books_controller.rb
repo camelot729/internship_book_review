@@ -3,7 +3,11 @@ class BooksController < ApplicationController
 
   expose :book
   expose :books, -> { Book.all }
-  expose :book_rating, parent: :current_user, find_by: :book_id
+  expose :book_rating, -> { fetch_book_rating }
+
+  def show
+
+  end
 
   def create
     book = current_user.books.new(book_params)
@@ -32,6 +36,10 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def fetch_book_rating
+    current_user.book_ratings.find_by(book_id: book.id)
+  end
 
   def book_params
     params.require(:book).permit(

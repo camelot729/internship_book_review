@@ -26,7 +26,7 @@ p
     = book.rating
 p
   strong Stars:
-  - unless book_rating.nil?
+  - if book_rating
     = book_rating.rating_value
     => link_to 'Edit', edit_book_book_rating_path(book, book_rating)
   - else

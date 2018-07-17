@@ -12,6 +12,6 @@ class Book < ApplicationRecord
   def rating
     return unless book_ratings.any?
 
-    book_ratings.sum(:rating_value) / book_ratings.count
+    book_ratings.sum(:rating_value) / book_ratings.count.to_f
   end
 end
