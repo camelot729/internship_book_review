@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if user.update_with_password(user_params)
       redirect_to root_path
     else
-      render "edit"
+      render :edit
     end
   end
 

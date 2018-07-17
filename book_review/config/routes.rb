@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  #, only %i{create update destroy}
   resources :books do
     resources :review_comments
     resources :book_ratings

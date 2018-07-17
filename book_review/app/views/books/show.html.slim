@@ -20,10 +20,13 @@ p
 
 p
   strong Overrall rating:
-  = overall_rating
+  - if book.rating.nil?
+    | &nbsp No rating yet
+  - else
+    = book.rating
 p
   strong Stars:
-  - unless book_rating.new_record?
+  - unless book_rating.nil?
     = book_rating.rating_value
     => link_to 'Edit', edit_book_book_rating_path(book, book_rating)
   - else

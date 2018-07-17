@@ -1,19 +1,10 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: [:update, :destroy]
 
   expose :book
-  expose :books, -> {Book.all}
-  expose :book_rating, ->{current_user.book_ratings.find_by(book_id: params[:id])}
-  expose :overall_rating, ->{Book.find(params[:id]).rating}
+  expose :books, -> { Book.all }
+  expose :book_rating, -> { current_user.book_ratings.find_by(book_id: params[:id]) }
 
-
-  def show
-    unless book_rating
-      book_rating = book.book_ratings.new
-    end
-    overall_rating
-  end
 
   def create
     book = current_user.books.new(book_params)
@@ -39,11 +30,8 @@ class BooksController < ApplicationController
   end
 
   private
-    def set_book
-      book = Book.find(params[:id])
-    end
 
-    def book_params
-      params.require(:book).permit(:title, :review, :book_rating, :review_rating, :publication_time, :book_image)
-    end
+  def book_params
+    params.require(:book).permit(:title, :review, :book_rating, :review_rating, :publication_time, :book_image)
+  end
 end

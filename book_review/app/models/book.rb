@@ -10,11 +10,9 @@ class Book < ApplicationRecord
 
 
   def rating
-    if book_ratings.count == 0
-      0
-    else
-      book_ratings.sum(:rating_value) / book_ratings.count
-    end
+    return unless book_ratings.any?
+
+    book_ratings.sum(:rating_value) / book_ratings.count
   end
 
   private
