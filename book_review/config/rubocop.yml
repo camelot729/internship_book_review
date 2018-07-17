@@ -1,0 +1,24 @@
+AllCops:
+  RubyInterpreters:
+    - ruby
+  Exclude:
+    - "config/initializers/devise.rb"
+    - "bin/**/*"
+    - "config/environments/**/*"
+    - "db/schema.rb"
+    - "db/migrate/**/*"
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Max: 80
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation

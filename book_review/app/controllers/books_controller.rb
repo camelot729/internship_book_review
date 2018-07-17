@@ -3,13 +3,14 @@ class BooksController < ApplicationController
 
   expose :book
   expose :books, -> { Book.all }
-  expose :book_rating, -> { current_user.book_ratings.find_by(book_id: params[:id]) }
-
+  expose :book_rating,
+    -> { current_user.book_ratings.find_by(book_id: params[:id]) }
 
   def create
     book = current_user.books.new(book_params)
     if book.save
-      redirect_to book, notice: 'Book was successfully created.'
+      redirect_to book,
+        notice: "Book was successfully created."
     else
       render :new
     end
@@ -18,7 +19,8 @@ class BooksController < ApplicationController
   def update
     book = current_user.book.find(params[:id])
     if book.update(book_params)
-      redirect_to book, notice: 'Book was successfully updated.'
+      redirect_to book,
+        notice: "Book was successfully updated."
     else
       render :edit
     end
@@ -26,12 +28,20 @@ class BooksController < ApplicationController
 
   def destroy
     book.destroy
-    redirect_to books_url, notice: 'Book was successfully destroyed.'
+    redirect_to books_url,
+      notice: "Book was successfully destroyed."
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:title, :review, :book_rating, :review_rating, :publication_time, :book_image)
+    params.require(:book).permit(
+      :title,
+      :review,
+      :book_rating,
+      :review_rating,
+      :publication_time,
+      :book_image
+    )
   end
 end
