@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Rating value:
+  = @book_rating.rating_value
+p
+  strong Book:
+  = @book_rating.book
+
+=> link_to 'Edit', edit_book_rating_path(@book_rating)
+'|
+=< link_to 'Back', book_ratings_path

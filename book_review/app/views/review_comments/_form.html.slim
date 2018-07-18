@@ -1,9 +1,9 @@
-= form_for [:book, @review_comment] do |f|
-  - if @review_comment.errors.any?
+= form_for [:book, review_comment] do |f|
+  - if review_comment.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@review_comment.errors.count, "error")} prohibited this review_comment from being saved:"
+      h2 = "#{pluralize(review_comment.errors.count, "error")} prohibited this review_comment from being saved:"
       ul
-        - @review_comment.errors.full_messages.each do |message|
+        - review_comment.errors.full_messages.each do |message|
           li = message
 
   .field
@@ -12,7 +12,4 @@
   .field
     = f.label :body
     = f.text_field :body
-  .field
-    = f.label :book
-    = f.text_field :book
   .actions = f.submit

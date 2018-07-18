@@ -1,0 +1,5 @@
+= form_for [book, book.book_ratings.new] do |f|
+  = f.label :rating_value
+  = f.number_field :rating_value
+
+  = f.submit

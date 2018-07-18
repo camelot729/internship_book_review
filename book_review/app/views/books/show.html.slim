@@ -1,26 +1,45 @@
 p#notice = notice
-
+p
+  .round-image-50
+    = image_tag book.book_image.url(:thumb)
 p
   strong Title:
-  = @book.title
+  = book.title
 p
   strong Review:
-  = @book.review
+  = book.review
 p
   strong Book rating:
-  = @book.book_rating
+  = book.book_rating
 p
   strong Review rating:
-  = @book.review_rating
+  = book.review_rating
 p
   strong Publication time:
-  = @book.publication_time
-- if @book.user_id == current_user.id
-  => link_to 'Edit', edit_book_path(@book)
+  = book.publication_time
+
+p
+  strong Overrall rating:
+  - if book.rating.nil?
+    | &nbsp No rating yet
+  - else
+    = book.rating
+p
+  strong Stars:
+  - if book_rating
+    = book_rating.rating_value
+    => link_to 'Edit', edit_book_book_rating_path(book, book_rating)
+  - else
+    = render "book_rating"
+
+
+
+- if book.user == current_user
+  => link_to 'Edit', edit_book_path(book)
   '|
 =< link_to 'Back', books_path
 
-= form_with(model: [ @book, ReviewComment.new ], local: true) do |form|
+= form_with(model: [ book, ReviewComment.new ], local: true) do |form|
   .field
     = form.label :title
     = form.text_field :title
