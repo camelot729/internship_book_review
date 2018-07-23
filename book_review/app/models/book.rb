@@ -5,7 +5,7 @@ class Book < ApplicationRecord
 
   has_attached_file :book_image,
     styles: { medium: "300x300#", thumb: "100x100>" },
-    default_url: "/images/:style/book.png"
+    default_url: "/images/book.jpeg"
 
   validates_attachment_content_type :book_image, content_type: %r{\Aimage\/.*\Z}
 

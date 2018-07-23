@@ -1,35 +1,43 @@
-.col-md-4.offset-md-5
-  h1 Listing books
-.col-md-9.offset-md-1
-  table.table
-    thead
-      tr
-        th Title
-        th Review
-        th Book rating
-        th Review rating
-        th Publication time
-        th
-        th
-        th
 
-    tbody
-      - books.each do |b|
-        tr
-          td = b.title
-          td = b.review
-          td = b.book_rating
-          td = b.user.email
-          td = b.publication_time
-          td.btn.btn-success = link_to 'Show', b
-          - if b.user == current_user
-            td.btn.btn-warning = link_to 'Edit', edit_book_path(b)
-            td.btn.btn-danger = link_to 'Destroy', b, data: { confirm: 'Are you sure?' }, method: :delete
+.container
+  .row
+    .col-md-4.offset-md-5
+      h1 Listing books
+  .container
+    .row
+      .col-md-4.offset-md-5
+        - books.each do |b|
 
-br
+          = image_tag b.book_image.url(:thumb)
+          p
+          dl
+            dt Book Title:
+            dd = b.title
+            dt Review:
+            dd = b.review
+            dt Overrall rating:лоытпыдлоапыпа
+            dd
+              - if b.rating.nil?
+                | No rating yet
+              - else
+                = b.rating
+            dt Publication time
+            dd = b.publication_time
+            = link_to 'Show', b, class: "btn btn-success"
+            - if b.user == current_user
+              = link_to 'Edit', edit_book_path(b), class: "btn btn-warning"
+              = link_to 'Destroy', b, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+          br
+          br
+          hr
 
-.col-md-9.offset-md-1
-  = link_to 'New Book', new_book_path, class: "btn btn-success btn-lg"
+
+
+
+  br
+
+  .col-md-9.offset-md-1
+    = link_to 'New Book', new_book_path, class: "btn btn-success btn-lg"
 
 
 

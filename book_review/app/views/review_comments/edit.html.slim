@@ -1,8 +1,9 @@
-h1 Editing review_comment
+.col-md-4.offset-md-4
+  h1 Editing review_comment
 
-== render 'form'
+  == render 'form'
 
-=> link_to 'Show', [:book, review_comment]
-'|
-=< link_to 'Back', book_path(review_comment.book)
+  => link_to 'Show', [:book, review_comment]
+  '|
+  =< link_to 'Back', book_path(review_comment.book)
 

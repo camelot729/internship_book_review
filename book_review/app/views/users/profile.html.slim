@@ -5,11 +5,11 @@
   .row
     - if user_signed_in?
       .col-md-6
-        | Здравствуйте,
+        | Hello,
         = current_user.email
     - else
       = render 'form'
 .col-md-4.offset-md-5.my-margin-top
   .btn-group
-    .btn.btn-outline-success = link_to 'Редактировать', edit_user_registration_path
+    .btn.btn-outline-success = link_to 'Edit profile info', edit_user_registration_path
     / .btn.btn-outline-primary = link_to 'Мои заметки', my_events_path

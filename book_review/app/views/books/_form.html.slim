@@ -1,4 +1,5 @@
-= form_for book do |f|
+
+= form_for book, class: "form-group" do |f|
   - if book.errors.any?
     #error_explanation
       h2 = "#{pluralize(book.errors.count, "error")} prohibited this book from being saved:"
@@ -8,19 +9,14 @@
   .field
     = f.label :book_image
     = f.file_field :book_image
+    br
   .field
-    = f.label :title
-    = f.text_field :title
+    = f.text_field :title, class: "form-control", placeholder: "Title"
+    br
   .field
-    = f.label :review
-    = f.text_field :review
-  .field
-    = f.label :book_rating
-    = f.number_field :book_rating
-  .field
-    = f.label :review_rating
-    = f.number_field :review_rating
+    = f.text_area :review, class: "form-control", placeholder: "Review"
+    br
   .field
     = f.label :publication_time
-    = f.date_select :publication_time
+    = f.date_select :publication_time, class: "form-control"
   .actions = f.submit

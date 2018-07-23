@@ -22,7 +22,7 @@ class BooksController < ApplicationController
 
   def destroy
     book.destroy
-    respond_with(books, location: books_path)
+    respond_with(book, location: books_path)
   end
 
   private
