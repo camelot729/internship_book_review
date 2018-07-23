@@ -1,34 +1,35 @@
-h1 Listing books
-
-table
-  thead
-    tr
-      th Title
-      th Review
-      th Book rating
-      th Review rating
-      th Publication time
-      th
-      th
-      th
-
-  tbody
-    - books.each do |b|
+.col-md-4.offset-md-5
+  h1 Listing books
+.col-md-9.offset-md-1
+  table.table
+    thead
       tr
-        td = b.title
-        td = b.review
-        td = b.book_rating
-        td = b.user.email
-        td = b.publication_time
-        td = link_to 'Show', b
-        - if b.user == current_user
-          td = link_to 'Edit', edit_book_path(b)
-          td = link_to 'Destroy', b, data: { confirm: 'Are you sure?' }, method: :delete
+        th Title
+        th Review
+        th Book rating
+        th Review rating
+        th Publication time
+        th
+        th
+        th
+
+    tbody
+      - books.each do |b|
+        tr
+          td = b.title
+          td = b.review
+          td = b.book_rating
+          td = b.user.email
+          td = b.publication_time
+          td.btn.btn-success = link_to 'Show', b
+          - if b.user == current_user
+            td.btn.btn-warning = link_to 'Edit', edit_book_path(b)
+            td.btn.btn-danger = link_to 'Destroy', b, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
-= link_to 'New Book', new_book_path
-
+.col-md-9.offset-md-1
+  = link_to 'New Book', new_book_path, class: "btn btn-success btn-lg"
 
 
 

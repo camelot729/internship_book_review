@@ -1,38 +1,28 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
 
+  responders :location
+  respond_to :html
+
   expose :book
   expose :books, -> { Book.all }
   expose :book_rating, -> { fetch_book_rating }
 
-  def show
-
-  end
-
   def create
     book.user = current_user
-    if book.save
-      redirect_to book,
-        notice: "Book was successfully created."
-    else
-      render :new
-    end
+    book.save
+    respond_with (book)
   end
 
   def update
     book.user = current_user
-    if book.update(book_params)
-      redirect_to book,
-        notice: "Book was successfully updated."
-    else
-      render :edit
-    end
+    book.update book_params
+    respond_with(book)
   end
 
   def destroy
     book.destroy
-    redirect_to books_url,
-      notice: "Book was successfully destroyed."
+    respond_with(books, location: books_path)
   end
 
   private
