@@ -8,7 +8,7 @@
   p
     = review_comment.user.email
   - if review_comment.user_id == current_user.id
-    => link_to 'Edit', edit_book_review_comment_path(book, review_comment)
+    => link_to 'Edit', edit_book_review_comment_path(book, review_comment), class: "btn btn-warning btn-lg"
     '|
-    =< link_to 'Destroy', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete
+    =< link_to 'Destroy', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger btn-lg"
 
