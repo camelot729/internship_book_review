@@ -14,9 +14,6 @@
     = f.text_field :title, class: "form-control", placeholder: "Title"
     br
   .field
-    = f.text_area :review, class: "form-control", placeholder: "Review"
+    = f.text_area :review, class: "form-control", placeholder: "Review", size: "25x15", required: true
     br
-  .field
-    = f.label :publication_time
-    = f.date_select :publication_time, class: "form-control"
   .actions = f.submit

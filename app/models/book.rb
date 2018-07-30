@@ -5,9 +5,11 @@ class Book < ApplicationRecord
 
   has_attached_file :book_image,
     styles: { medium: "300x300#", thumb: "100x100>" },
-    default_url: "/images/book.jpeg"
+    default_url: ":style/book.jpeg"
 
   validates_attachment_content_type :book_image, content_type: %r{\Aimage\/.*\Z}
+
+  validates :title, :review, presence: true
 
   def rating
     return unless book_ratings.any?

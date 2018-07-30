@@ -1,12 +1,14 @@
-p#notice = notice
+p#notice
+  = notice
 
 p
   strong Rating value:
-  = @book_rating.rating_value
+  = book_rating.rating_value
 p
   strong Book:
-  = @book_rating.book
-
-=> link_to 'Edit', edit_book_rating_path(@book_rating)
+  = book_rating.book.id
+- if policy(book).update?
+  => link_to 'Edit', edit_book_book_rating_path(book_rating)
 '|
-=< link_to 'Back', book_ratings_path
+- if policy(book).destroy?
+  =< link_to 'Back', book_book_rating_path

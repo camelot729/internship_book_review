@@ -10,17 +10,20 @@ class BooksController < ApplicationController
 
   def create
     book.user = current_user
+    authorize book
     book.save
     respond_with (book)
   end
 
   def update
+    authorize book
     book.user = current_user
     book.update book_params
     respond_with(book)
   end
 
   def destroy
+    authorize book
     book.destroy
     respond_with(book, location: books_path)
   end
@@ -35,10 +38,8 @@ class BooksController < ApplicationController
     params.require(:book).permit(
       :title,
       :review,
-      :book_rating,
-      :review_rating,
-      :publication_time,
-      :book_image
+      :book_image,
+      :created_at
     )
   end
 end

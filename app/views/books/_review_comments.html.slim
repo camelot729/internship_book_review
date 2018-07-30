@@ -1,14 +1,21 @@
 - book.review_comments.each do |review_comment|
-  p
-    strong
-      | Title: &nbsp
-      = review_comment.title
+  - if review_comment.errors.any?
+      #error_explanation
+        h2
+          = pluralize(review_comment.errors.count, "error")
+          |  prohibited this review_comment from being saved:
+        ul
+          - review_comment.errors.full_messages.each do |message|
+            li
+              = message
   p
     = review_comment.body
   p
     = review_comment.user.email
-  - if review_comment.user_id == current_user.id
-    => link_to 'Edit', edit_book_review_comment_path(book, review_comment), class: "btn btn-warning btn-lg"
+  / - if review_comment.user_id == current_user.id
+  - if policy(review_comment).update?
+    => link_to 'Edit', edit_book_review_comment_path(book, review_comment), class: "btn btn-warning btn-sm"
     '|
-    =< link_to 'Destroy', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger btn-lg"
-
+  - if policy(review_comment).destroy?
+    =< link_to 'Destroy', [review_comment.book, review_comment], data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger btn-sm"
+  hr

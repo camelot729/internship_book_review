@@ -9,16 +9,19 @@ class ReviewCommentsController < ApplicationController
   def create
     review_comment = book.review_comments.create(review_comment_params)
     review_comment.user = current_user
+    authorize review_comment
     review_comment.save
     respond_with(review_comment.book, location: book)
   end
 
   def update
+    authorize review_comment
     review_comment.update(review_comment_params)
     respond_with(review_comment, location: review_comment.book)
   end
 
   def destroy
+    authorize review_comment
     review_comment = book.review_comments.find(params[:id])
     review_comment.destroy
     respond_with(review_comment.book, location: book)

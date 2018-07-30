@@ -1,3 +1,5 @@
+p#notice
+  = notice
 h1 Listing review_comments
 
 table
@@ -13,7 +15,6 @@ table
   tbody
     - @review_comments.each do |review_comment|
       tr
-        td = review_comment.title
         td = review_comment.body
         td = review_comment.book
         td = link_to 'Show', review_comment
