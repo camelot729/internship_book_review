@@ -1,0 +1,30 @@
+- books.each do |b|
+  .book data-book-id="#{b.id}"
+    .card style=("width: 18rem;")
+      .card-img-top = image_tag b.book_image.url(:medium)
+      .card-body
+        h3.card-title
+          dl
+            dd = b.title
+        p.card-text
+          dl
+            dt Review:
+            dd = b.review
+        p.card-text
+          dl
+            dt User:
+            dd = b.user.email
+        p.card-text
+          dl
+            dt Overrall rating:
+            dd
+              = b.rating.presence || "No rating yet"
+        .btn-toolbar
+        .btn-group.mr-1
+          = link_to 'Show', b, class: "btn btn-success btn-sm"
+        .btn-group.mr-1
+          - if policy(book).update?
+            = link_to 'Edit', edit_book_path(b), class: "btn btn-warning btn-sm"
+        .btn-group.mr-1
+          - if policy(book).destroy?
+            = link_to 'Destroy', b, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger btn-sm"

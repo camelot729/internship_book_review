@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 feature "As guest I want to sign in to my account" do
   let!(:user) { create(:user) }
@@ -7,8 +7,8 @@ feature "As guest I want to sign in to my account" do
 
     expect(page).to have_content "Log in"
 
-    fill_in 'user_email', with: "user@example.com"
-    fill_in 'user_password', with: "123456"
+    fill_in "user_email", with: "user@example.com"
+    fill_in "user_password", with: "123456"
 
     click_button "Log in"
     expect(page).to have_content "Log out"
@@ -19,8 +19,8 @@ feature "As guest I want to sign in to my account" do
 
     expect(page).to have_content "Log in"
 
-    fill_in 'user_email', with: "user@example.com"
-    fill_in 'user_password', with: "12345"
+    fill_in "user_email", with: "user@example.com"
+    fill_in "user_password", with: "12345"
 
     click_button "Log in"
     expect(page).to have_content "Log in"

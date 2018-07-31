@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :user do
-    email "user@example.com"
+    sequence(:email){ |n| "user#{n}@test.com"}
     password "123456"
   end
 
   factory :book do
-    title "sdf"
-    review "sdg"
+    sequence(:title){ |n| "Books Title ##{n}"}
+    review "Books Review"
   end
 end
