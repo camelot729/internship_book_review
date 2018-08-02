@@ -1,61 +1,60 @@
-p#notice = notice
-
 p
-.col-md-4.offset-md-4
-  / .round-image-50
-  = image_tag book.book_image.url(:thumb)
+.book
+  .col-md-4.offset-md-4
+    = image_tag book.book_image.url(:thumb)
+  .col-md-4.offset-md-4
+    table.table
+      tr.book-title
+        td
+          | Title:
+        td
+          = book.title
+      tr.book-review
+        td
+          | Review:
+        td
+          = book.review
+      tr.overrall-rating
+        td
+          | Overrall rating:
+        td
+          - if book.rating.nil?
+            | &nbsp No rating yet
+          - else
+            = book.rating
+      tr.stars
+        td
+          | Stars:
+        td
+          - if book_rating
+            = book_rating.rating_value
+            => link_to 'Edit', edit_book_book_rating_path(book, book_rating)
+          - else
+            = render "book_rating"
+      tr
+        td
+          | Author
+        td
+          = book.user.email
 
-.col-md-4.offset-md-4
-  table.table
-    tr
-      td
-        | Title:
-      td
-        = book.title
-    tr
-      td
-        | Review:
-      td
-        = book.review
-    tr
-      td
-        | Overrall rating:
-      td
-        - if book.rating.nil?
-          | &nbsp No rating yet
-        - else
-          = book.rating
-    tr
-      td
-        | Stars:
-      td
-        - if book_rating
-          = book_rating.rating_value
-          => link_to 'Edit', edit_book_book_rating_path(book, book_rating)
-        - else
-          = render "book_rating"
-.col-md-4.offset-md-5
-  .btn-group-justified
-    - if book.user == current_user
-      => link_to 'Edit', edit_book_path(book), class: "btn btn-success btn-lg"
-    =< link_to 'Back', books_path, class: "btn btn-danger btn-lg"
+  .btn-group-justified.offset-md-5
+    - if policy(book).update?
+      => link_to 'Edit', edit_book_path(book), class: "btn btn-success btn-sm"
+    - if policy(book).update?
+      => link_to 'Destroy', book_path(book), method: :delete, class: "btn btn-warning btn-sm"
+    =< link_to 'Back', books_path, class: "btn btn-danger btn-sm"
 
 br
 br
+.comment
+  .col-md-4.offset-md-4
 
-.col-md-4.offset-md-4
+    = form_with(model: [ book, ReviewComment.new ], local: true, class: "form-group") do |form|
+      .field
+        = form.label :body
+        = form.text_field :body,  class: "form-control"
 
-  = form_with(model: [ book, ReviewComment.new ], local: true, class: "form-group") do |form|
-    .field
-      = form.label :title
-      = form.text_field :title,  class: "form-control"
-
-    .field
-      = form.label :body
-      = form.text_field :body,  class: "form-control"
-
-    = form.submit
-  h2
-    | Comments:
-
-  = render 'review_comments'
+      = form.submit
+    h2
+      | Comments:
+    = render 'review_comments'

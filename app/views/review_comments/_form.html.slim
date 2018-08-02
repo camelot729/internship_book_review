@@ -5,10 +5,6 @@
       ul
         - review_comment.errors.full_messages.each do |message|
           li = message
-
-  .field
-    = f.label :title
-    = f.text_field :title, class: "form-control"
   .field
     = f.label :body
     = f.text_field :body, class: "form-control"

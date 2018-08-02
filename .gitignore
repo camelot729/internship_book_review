@@ -1,0 +1,22 @@
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/test/*
+# Ignore uploaded files in development
+/storage/*
+
+/node_modules
+/yarn-error.log
+*.log
+
+/public/assets
+/public/images
+/public/system
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
